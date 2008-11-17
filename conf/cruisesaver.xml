@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Copyright (c) James A. Wilson
+-->
+
+<!--
+	- xscreensaver-style configuration file for CruiseSaver screensaver.
+	-
+	- For details about the file format of this file, see the hacks/config/README
+	- file in the xscreensaver distribution, copied here for convenience:
+	- https://jdic.dev.java.net/documentation/incubator/screensaver/xscreensaver-config.txt
+-->
+<screensaver name="cruisesaver" _label="CruiseControl Status">
+	<command arg="-root" />
+	<command arg="-jar cruisesaver.jar" />
+	<command arg="-class status.CCCollidingStatus" />
+	<file id="jdkhome" _label="Java Home (blank=auto)" arg="-jdkhome %" />
+	
+	<select id="protocol_id" _label="Protocol">
+		<option id="rss_id" _label="RSS" arg-set="-PROTOCOL RSS"/>
+		<option id="jmx_id" _label="JMX" arg-set="-PROTOCOL JMX"/>
+  </select>
+
+	<string id="host_id" _label="CruiseControl host" arg="-HOST %" />
+
+	<string id="rmi_port_id"
+		_label="CruiseControl port (e.g. -rmiport 1099)" arg="-PORT %" />
+
+	<number id="ball_size" type="slider" arg="-SIZE %"
+		_label="The size of each ball" _low-label="min" _high-label="max"
+		low="30" high="100" default="40" />
+
+	<number id="update_delay" type="slider" arg="-UPDATEDELAY %"
+		_label="seconds between updates" _low-label="5" _high-label="60"
+		low="5" high="60" default="10" />
+
+	<number id="font_size" type="slider" arg="-FONT_SIZE %"
+		_label="Font Size" _low-label="8" _high-label="20"
+		low="8" high="20" default="10" />			
+	<boolean id="DEBUG_FLAG" _label="debug" arg-set="-DEBUG true" />
+
+	<_description>
+The status of CruiseControl builds is shown as bouncing colored
+balls.  If Using the JMX protocol,your CruiseControl installation 
+needs to be patched with CC-493 from the CruiseControl Jira site.
+Then the port is usually configured as -rmiport 1099 in cruisecontrol.sh
+
+If using the RSS protocol, the port is usually 8080. See the
+RSS link at the bottom of your CruiseControl build status page.
+RSS library is "Stealthp".  The particical party ball interaction
+is from &lt;http://steering.googlecode.com/&gt;.
+
+For updates and moe detail instructions, visit 
+ &lt;http://cruisesaver.sourceforge.net/&gt;.
+
+By James A. Wilson and very kind contributors.
+	</_description>
+
+</screensaver>

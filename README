@@ -1,0 +1,79 @@
+CruiseSaver: The CruiseControl ScreenSaver
+---------------
+
+CruiseSaver is a screen saver that shows the current status of all of
+your CruiseControl projects. It is built as a Java SaverBean. As a
+SaverBean, it installs, configures, and runs like any native screen
+saver under Windows or XScreenSaver on Unix, Linux, and Mac.
+
+The idea was born to have a better "Ambient Orb" (search Google if
+you're not familiar with the orb) to show the status of all of our
+projects on the LCD hung on the wall. We've been using CruiseSaver at
+work since February 2007.
+
+The screen saver uses JMX or RSS to communicate with
+CruiseControl. RSS requires no limits to your CruiseControl
+installation. Though it does provides less feedback. The JMX
+communication requires CruiseControl version 2.7.3 or higher. This
+version includes a new JMX method that I needed.
+
+
+Quick Start
+---------------
+
+You have two options for connecting to your CruiseControl build loop:
+
+    * JMX (Java Management Extensions) -- provides comple build
+      status: building, queued, success, failure
+
+    * RSS (Really Simple Syndication) -- provides only build success
+      or failure
+
+JMX Configuration
+---------------
+
+The JMX configuration provides complete build status feedback. The
+orbs in the screen saver will show you when they are building and if
+they are queued to build (as well as how deep). If the screen saver is
+running, visible in yor teams lab for all to see, this queued depth is
+great feedback to realize you builds have run into trobule.
+Make sure that cruisecontrol.sh starts the engine with "-jmxport 8000
+-rmiport <your-rmi-port>. That last <your-rmi-port> is what port
+you'll configure CruiseSaver to connect upon. The default is 1099.
+
+
+RSS Configuration
+---------------
+
+The RSS feed is already coming out of your CruiseControl build
+loop. No configuration changes are needed. You can see the RSS image
+at the bottom of the main page of the build results web site. This RSS
+feed however only announces build results, not the building and queued
+states. On the upside, this is backwards compatable to older version of
+CruiseControl. I'm not sure how far back, but you should be fine to at
+least 2.6. Just configure CruiseSaver to connect upon that same http
+port (the defauilt is 8080) as the build results web site.
+
+
+Windows
+---------------
+
+Windows is easy. Download the win32 zip and extract the contents to
+your windows system32 directory. You'll know you're in the right
+directory because there will be other *.scr files there. This release
+includes a cruisesaver.scr and the two necessary JAR files. The README
+in the zip will tell you these same instructions.
+
+
+XScreenSaver (Linux, etc)
+---------------
+
+I have not spent as much time as I should have on the XScreenSaver
+compile. Contact me if you are insterested. It will work. I have
+reports that it compiled and ran fine on Fedora with a 5.x version of
+XScreenSaver thanks to our updated versions of saverbeans-*.jar.
+
+Running as an XScreenSaver "hack" is a bit more work. You need to run
+make. Download and extract the unix zip. The main dependency to make
+CruiseSaver (really any Java SaverBean) is XScreenSaver. I have an
+env.sh script that might help you with the environment needed to make.
